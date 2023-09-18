@@ -20,9 +20,13 @@ public class studentController {
         return StudentService.getStudents();
     }
 
-    //Post API
     @PostMapping
     public StudentDTO registerNewStudent(@RequestBody StudentDTO Student) {
         return StudentService.addNewStudent(Student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long studentId){
+        studentService.deleteStudent(studentId);
     }
 }

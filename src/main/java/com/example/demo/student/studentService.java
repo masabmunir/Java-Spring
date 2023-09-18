@@ -15,13 +15,14 @@ public class studentService {
     @Autowired
     private StudentRepository studentRepository;
 
-
     public StudentDTO addNewStudent(StudentDTO studentDTO) {
         studentDTO.setId(Math.abs(UUID.randomUUID().getMostSignificantBits()));
         Student student = convertDTOToModel(studentDTO);
         studentRepository.save(student);
         return convertModelToDTO(student);
     }
+
+
 
     public List<Student> getStudents() {
         return studentRepository.findAll();
@@ -46,5 +47,10 @@ public class studentService {
         studentDTO.setId(studentDTO.getId());
         return studentDTO;
     }
- // For checking
+
+    public static void deleteStudent(Long studentId) {
+
+    }
+
+
 }
