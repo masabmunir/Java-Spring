@@ -20,6 +20,7 @@ public class studentController {
         return StudentService.getStudents();
     }
 
+    //Post API
     @PostMapping
     public StudentDTO registerNewStudent(@RequestBody StudentDTO Student) {
         return StudentService.addNewStudent(Student);
