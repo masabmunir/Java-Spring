@@ -1,5 +1,4 @@
 package com.example.demo.student;
-
 import com.example.demo.student.dto.StudentDTO;
 import com.example.demo.student.model.Student;
 import com.example.demo.student.repository.StudentRepository;
@@ -48,9 +47,13 @@ public class studentService {
         return studentDTO;
     }
 
-    public static void deleteStudent(Long studentId) {
+    public void deleteStudent(Long studentId) {
+       boolean exists = studentRepository.existsById(studentId);
+       if(!exists){
+           throw new IllegalStateException("Student with Id " + studentId + "does not exists");
+       }
 
+       studentRepository.deleteById(studentId);
     }
-
 
 }
