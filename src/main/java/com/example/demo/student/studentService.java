@@ -2,10 +2,13 @@ package com.example.demo.student;
 import com.example.demo.student.dto.StudentDTO;
 import com.example.demo.student.model.Student;
 import com.example.demo.student.repository.StudentRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -52,8 +55,24 @@ public class studentService {
        if(!exists){
            throw new IllegalStateException("Student with Id " + studentId + "does not exists");
        }
-
        studentRepository.deleteById(studentId);
     }
 
+    @Transactional
+    public void updateStudent(Long studentId, String name, String email) {
+        Student student = studentRepository.findById(studentId)
+                .orElseThrow(()-> new IllegalStateException("Student with id" + studentId + "does not exists"));
+
+        if(name !=null &&
+                         !name.isEmpty() &&
+                         !Objects.equals(student.getName(),name)){
+            student.setName(name);
+        }
+
+        if(email !=null &&
+                         !email.isEmpty() &&
+                         !Objects.equals(student.getEmail(),email)){
+            Optional<Student> studentOptional = studentRepository.
+        }
+    }
 }
