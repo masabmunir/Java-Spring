@@ -66,13 +66,19 @@ public class studentService {
         if(name !=null &&
                          !name.isEmpty() &&
                          !Objects.equals(student.getName(),name)){
-            student.setName(name);
+                         student.setName(name);
         }
 
         if(email !=null &&
                          !email.isEmpty() &&
                          !Objects.equals(student.getEmail(),email)){
-            Optional<Student> studentOptional = studentRepository.
+                         Optional<Student> studentOptional = studentRepository.findStudentByEmail(email);
+
+            if(studentOptional.isPresent()){
+                throw new IllegalStateException("email taken");
+            }
+            student.setEmail(email);
+
         }
     }
 }
