@@ -30,7 +30,6 @@ public class studentController {
             @PathVariable ("studentId") Long studentId,
             @RequestParam (required = false) String name,
             @RequestParam (required = false) String email) {
-
         StudentService.updateStudent(studentId,name,email);
     }
 

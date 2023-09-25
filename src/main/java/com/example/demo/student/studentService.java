@@ -17,17 +17,16 @@ public class studentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    public List<Student> getStudents() {
+        return studentRepository.findAll();
+    }
+
+
     public StudentDTO addNewStudent(StudentDTO studentDTO) {
         studentDTO.setId(Math.abs(UUID.randomUUID().getMostSignificantBits()));
         Student student = convertDTOToModel(studentDTO);
         studentRepository.save(student);
         return convertModelToDTO(student);
-    }
-
-
-
-    public List<Student> getStudents() {
-        return studentRepository.findAll();
     }
 
     private static Student convertDTOToModel(StudentDTO studentDTO) {
